@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     type: "text",
-    label: "test label",
+    label: "label",
+    placeholder: undefined,
   },
 };
