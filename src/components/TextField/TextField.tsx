@@ -1,21 +1,54 @@
+import { Control, FieldValues, Path } from "react-hook-form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 
-interface TextFieldProps {
+interface TextFieldProps<T extends FieldValues> {
+  // フォームフィールド名
+  name: Path<T>;
   // inputのタイプ
   type: string;
   // ラベル
   label: string;
   //プレースホルダー
   placeholder?: string;
+  // フォームコントロール
+  control: Control<T>;
 }
-export function TextField({ type, label, placeholder }: TextFieldProps) {
+
+/**
+ * テキストフィールドコンポーネント
+ */
+export function TextField<T extends FieldValues>({
+  name,
+  type = "text",
+  label,
+  placeholder,
+  control,
+}: TextFieldProps<T>) {
   return (
-    <div>
-      <Label htmlFor={label} className="m-2 bold">
-        {label}
-      </Label>
-      <Input id={label} type={type} placeholder={placeholder ?? label} />
-    </div>
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel className="m-1 bold">{label}</FormLabel>
+          <FormControl>
+            <Input
+              id={label}
+              type={type}
+              placeholder={placeholder ?? label}
+              {...field}
+            />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 }
