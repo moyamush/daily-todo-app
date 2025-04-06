@@ -1,3 +1,4 @@
+"use client";
 import { Control, FieldValues, Path } from "react-hook-form";
 import {
   FormControl,
@@ -19,6 +20,8 @@ interface TextFieldProps<T extends FieldValues> {
   placeholder?: string;
   // フォームコントロール
   control: Control<T>;
+  // CSSクラス
+  className?: string;
 }
 
 /**
@@ -30,14 +33,15 @@ export function TextField<T extends FieldValues>({
   label,
   placeholder,
   control,
+  className,
 }: TextFieldProps<T>) {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
-          <FormLabel className="m-1 bold">{label}</FormLabel>
+        <FormItem className={className}>
+          <FormLabel className="bold">{label}</FormLabel>
           <FormControl>
             <Input
               id={label}
