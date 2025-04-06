@@ -6,7 +6,7 @@ import { BsCalendar2Date } from "react-icons/bs";
 
 interface HomeHeaderProps {
   // ログアウトメソッド
-  onLogout: () => void;
+  onLogout?: () => void;
 }
 
 /**
