@@ -12,7 +12,7 @@ interface HomeHeaderProps {
 /**
  * ホームヘッダーコンポーネント
  */
-const HomeHeader: FC<HomeHeaderProps> = ({ onLogout }) => {
+export function HomeHeader({ onLogout }: HomeHeaderProps) {
   const now = new Date();
   const today = format(now, "yyyy-MM-dd");
   return (
@@ -31,6 +31,4 @@ const HomeHeader: FC<HomeHeaderProps> = ({ onLogout }) => {
       </Button>
     </header>
   );
-};
-
-export default HomeHeader;
+}

@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react";
-import Calendar from "./Calendar";
+import { Meta } from "@storybook/react";
 import { useState } from "react";
+import { Calendar } from "./Calendar";
 
 const meta = {
   component: Calendar,

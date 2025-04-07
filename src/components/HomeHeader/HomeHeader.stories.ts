@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import HomeHeader from "./HomeHeader";
 import { fn } from "@storybook/test";
+import { HomeHeader } from "./HomeHeader";
 
 const meta = {
   component: HomeHeader,

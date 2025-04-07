@@ -15,7 +15,7 @@ interface CalendarProps {
 /**
  * カレンダーコンポーネント
  */
-const Calendar: FC<CalendarProps> = ({ selected, onSelected, className }) => {
+export function Calendar({ selected, onSelected, className }: CalendarProps) {
   const defaultClassNames = getDefaultClassNames();
   return (
     <DayPicker
@@ -27,11 +27,11 @@ const Calendar: FC<CalendarProps> = ({ selected, onSelected, className }) => {
       showOutsideDays
       className={className}
       classNames={{
-        root: `${defaultClassNames.root} text-[32px]`,
-        day: `${defaultClassNames.day} p-5`,
+        root: `${defaultClassNames.root} text-4xl`,
+        day: `${defaultClassNames.day} p-4`,
         today: "",
         selected: "bg-primary text-primary-foreground rounded-lg",
-        caption_label: `${defaultClassNames.caption_label} text-[44px]`,
+        caption_label: `${defaultClassNames.caption_label} text-4xl`,
         month_caption: `${defaultClassNames.month_caption} mb-5`,
         weekdays: `${defaultClassNames.weekdays} bg-primary text-primary-foreground`,
         nav: `${defaultClassNames.nav} scale-200 pr-3 text-primary`,
@@ -39,6 +39,4 @@ const Calendar: FC<CalendarProps> = ({ selected, onSelected, className }) => {
       }}
     />
   );
-};
-
-export default Calendar;
+}
