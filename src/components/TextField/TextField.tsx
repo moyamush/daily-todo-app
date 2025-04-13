@@ -50,7 +50,9 @@ export function TextField<T extends FieldValues>({
               {...field}
             />
           </FormControl>
-          <FormMessage />
+          <div className="min-h-5">
+            <FormMessage />
+          </div>
         </FormItem>
       )}
     />

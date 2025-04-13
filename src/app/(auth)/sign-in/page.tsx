@@ -5,7 +5,7 @@ import LoginForm from "./_components/LoginForm";
 /**
  * ログインページ
  */
-const page: FC = () => {
+const Page: FC = () => {
   return (
     <>
       <div className="flex justify-center mt-10">
@@ -15,4 +15,4 @@ const page: FC = () => {
   );
 };
 
-export default page;
+export default Page;

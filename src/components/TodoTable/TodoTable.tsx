@@ -1,3 +1,4 @@
+import EditTodo from "../EditTodo/EditTodo";
 import { Button } from "../ui/button";
 import {
   Table,
@@ -50,8 +51,8 @@ export function TodoTable({ tasks }: TodoTableProps) {
             <TableCell>{task.tag}</TableCell>
             <TableCell>{task.duration}分</TableCell>
             <TableCell>{task.status}</TableCell>
-            <TableCell>
-              <Button>編集</Button>
+            <TableCell className="flex gap-2">
+              <EditTodo />
               <Button>削除</Button>
             </TableCell>
           </TableRow>

@@ -16,7 +16,7 @@ const LoginForm: FC = () => {
     <Card className="w-1/2">
       <CardHeader>
         <CardTitle>ログイン</CardTitle>
-      </CardHeader>
+      </CardHeader>{" "}
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleLogin)}>
@@ -25,16 +25,16 @@ const LoginForm: FC = () => {
               type="text"
               label="ログインID"
               control={form.control}
-              className="mb-5"
+              className="mb-3"
             />
             <TextField
               name="password"
               type="password"
               label="パスワード"
               control={form.control}
-              className="mb-5"
+              className="mb-3"
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" size="lg" className="w-full">
               ログイン
             </Button>
           </form>

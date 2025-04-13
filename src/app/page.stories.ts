@@ -3,7 +3,7 @@ import Page from "./page";
 
 const meta = {
   component: Page,
-  title: "Page/Login",
+  title: "Page/Home",
   tags: ["autodocs"],
   parameters: {
     nextjs: {
