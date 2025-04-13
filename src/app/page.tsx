@@ -1,5 +1,6 @@
 "use client";
 import { Calendar } from "@/components/Calendar/Calendar";
+import CreateTodo from "@/components/CreateTodo/CreateTodo";
 import EditTodo from "@/components/EditTodo/EditTodo";
 import { HomeHeader } from "@/components/HomeHeader/HomeHeader";
 import { Task, TodoTable } from "@/components/TodoTable/TodoTable";
@@ -45,10 +46,7 @@ const Page: FC = () => {
             <div className="my-3 text-4xl font-bold">
               {format(date ?? new Date(), "yyyy/MM/dd")}のTODO一覧
             </div>
-            <Button size="lg">
-              <IoMdAdd />
-              新規追加
-            </Button>
+            <CreateTodo />
           </div>
           <TodoTable tasks={tasks} />
         </div>
