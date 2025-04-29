@@ -1,14 +1,12 @@
 "use client";
+import { getTodos } from "@/api/todos";
 import { Calendar } from "@/components/Calendar/Calendar";
 import CreateTodo from "@/components/CreateTodo/CreateTodo";
-import EditTodo from "@/components/EditTodo/EditTodo";
 import { HomeHeader } from "@/components/HomeHeader/HomeHeader";
 import { Task, TodoTable } from "@/components/TodoTable/TodoTable";
-import { Button } from "@/components/ui/button";
 import { useLogout } from "@/hooks/useLogout";
 import { format } from "date-fns";
-import { FC, useState } from "react";
-import { IoMdAdd } from "react-icons/io";
+import { FC, useEffect, useState } from "react";
 
 const tasks: Task[] = [
   {
@@ -35,6 +33,10 @@ const Page: FC = () => {
   const { handleLogout } = useLogout();
   // 日付
   const [date, setDate] = useState<Date | undefined>(new Date());
+
+  useEffect(() => {
+    getTodos({ id: "1" });
+  }, []);
 
   return (
     <>

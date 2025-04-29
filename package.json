@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "mock": "cross-env NODE_OPTIONS='--inspect' env-cmd -f .env/.env.mock next dev --turbopack",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -18,11 +19,14 @@
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-separator": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.2",
+    "axios": "^1.9.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cross-env": "^7.0.3",
     "date-fns": "^4.1.0",
     "env-cmd": "^10.1.0",
     "lucide-react": "^0.487.0",
+    "msw": "^2.7.5",
     "next": "15.2.4",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
@@ -68,6 +72,11 @@
   "eslintConfig": {
     "extends": [
       "plugin:storybook/recommended"
+    ]
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
     ]
   }
 }
