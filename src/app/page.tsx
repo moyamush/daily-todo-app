@@ -1,29 +1,12 @@
 "use client";
-import { getTodos } from "@/api/todos";
 import { Calendar } from "@/components/Calendar/Calendar";
 import CreateTodo from "@/components/CreateTodo/CreateTodo";
 import { HomeHeader } from "@/components/HomeHeader/HomeHeader";
-import { Task, TodoTable } from "@/components/TodoTable/TodoTable";
+import { TodoTable } from "@/components/TodoTable/TodoTable";
 import { useLogout } from "@/hooks/useLogout";
+import { useAppStore } from "@/providers/store-provider";
 import { format } from "date-fns";
-import { FC, useEffect, useState } from "react";
-
-const tasks: Task[] = [
-  {
-    id: 1,
-    taskName: "デフォルトタスク1",
-    tag: "プログラミング",
-    duration: 60,
-    status: "未処理",
-  },
-  {
-    id: 2,
-    taskName: "デフォルトタスク2",
-    tag: "プログラミング",
-    duration: 45,
-    status: "処理中",
-  },
-];
+import { FC } from "react";
 
 /**
  * メインページ
@@ -31,26 +14,27 @@ const tasks: Task[] = [
 const Page: FC = () => {
   // ログアウト
   const { handleLogout } = useLogout();
-  // 日付
-  const [date, setDate] = useState<Date | undefined>(new Date());
 
-  useEffect(() => {
-    getTodos({ id: "1" });
-  }, []);
+  // 選択中の日付
+  const { selectedDate, setSelectedDate } = useAppStore((state) => state);
 
   return (
     <>
       <HomeHeader onLogout={handleLogout} />
       <div className="flex p-4 gap-10">
-        <Calendar selected={date} onSelected={setDate} className="rounded-md" />
+        <Calendar
+          selected={selectedDate}
+          onSelected={setSelectedDate}
+          className="rounded-md"
+        />
         <div className="w-full">
           <div className="flex items-center justify-between">
             <div className="my-3 text-4xl font-bold">
-              {format(date ?? new Date(), "yyyy/MM/dd")}のTODO一覧
+              {format(selectedDate ?? new Date(), "yyyy/MM/dd")}のTODO一覧
             </div>
             <CreateTodo />
           </div>
-          <TodoTable tasks={tasks} />
+          <TodoTable />
         </div>
       </div>
     </>

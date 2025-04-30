@@ -7,7 +7,7 @@ interface CalendarProps {
   // 選択中の日付
   selected: Date | undefined;
   // 選択中の日付のコールバック関数
-  onSelected: Dispatch<SetStateAction<Date | undefined>>;
+  onSelected: (newDate: Date) => void;
   // CSSクラス
   className?: string;
 }
@@ -26,6 +26,7 @@ export function Calendar({ selected, onSelected, className }: CalendarProps) {
       onSelect={onSelected}
       showOutsideDays
       className={className}
+      required
       classNames={{
         root: `${defaultClassNames.root} text-4xl`,
         day: `${defaultClassNames.day} p-4`,

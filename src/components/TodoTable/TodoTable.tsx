@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from "react";
 import EditTodo from "../EditTodo/EditTodo";
 import { Button } from "../ui/button";
 import {
@@ -7,32 +8,31 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-
-/**
- * タスクインターフェース
- */
-export interface Task {
-  // id
-  id: number;
-  // タスク名
-  taskName: string;
-  // タグ
-  tag: string;
-  // 所要時間
-  duration: number;
-  // ステータス
-  status: string;
-}
-
-interface TodoTableProps {
-  // タスク一覧
-  tasks: Task[];
-}
+import { useAppStore } from "@/providers/store-provider";
+import { getTodos, TodosRequest, TodosResponse } from "@/api/todos";
+import { format } from "date-fns";
 
 /**
  * TODOテーブルコンポーネント
  */
-export function TodoTable({ tasks }: TodoTableProps) {
+export function TodoTable() {
+  // 選択中の日付
+  const { selectedDate } = useAppStore((state) => state);
+  // タスク一覧
+  const [tasks, setTasks] = useState<TodosResponse[]>([]);
+
+  const fetchData = useCallback(async () => {
+    const req: TodosRequest = {
+      date: format(selectedDate, "yyyyMMdd"),
+    };
+    const res = await getTodos(req);
+    setTasks(res);
+  }, [selectedDate]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   return (
     <Table>
       <TableHeader className="bg-primary text-primary-foreground">
@@ -45,18 +45,19 @@ export function TodoTable({ tasks }: TodoTableProps) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {tasks.map((task) => (
-          <TableRow key={task.id}>
-            <TableCell>{task.taskName}</TableCell>
-            <TableCell>{task.tag}</TableCell>
-            <TableCell>{task.duration}分</TableCell>
-            <TableCell>{task.status}</TableCell>
-            <TableCell className="flex gap-2">
-              <EditTodo />
-              <Button>削除</Button>
-            </TableCell>
-          </TableRow>
-        ))}
+        {tasks.length > 0 &&
+          tasks.map((task) => (
+            <TableRow key={task.id}>
+              <TableCell>{task.taskName}</TableCell>
+              <TableCell>{task.tag}</TableCell>
+              <TableCell>{task.duration}分</TableCell>
+              <TableCell>{task.status}</TableCell>
+              <TableCell className="flex gap-2">
+                <EditTodo />
+                <Button>削除</Button>
+              </TableCell>
+            </TableRow>
+          ))}
       </TableBody>
     </Table>
   );
