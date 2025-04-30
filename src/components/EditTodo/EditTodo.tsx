@@ -9,11 +9,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useEditTodo } from "./useEditTodo";
+import { TextField } from "../TextField/TextField";
+import { Form } from "../ui/form";
 
+/**
+ * TODO編集コンポーネント
+ */
 const EditTodo: FC = () => {
+  const { form, handleEditTodo, editOpen, setEditOpen } = useEditTodo();
   return (
-    <Dialog>
+    <Dialog open={editOpen} onOpenChange={setEditOpen}>
       <DialogTrigger asChild>
         <Button>編集</Button>
       </DialogTrigger>
@@ -24,14 +31,46 @@ const EditTodo: FC = () => {
             タスクの詳細を編集してください。
           </DialogDescription>
         </DialogHeader>
-        <div className="flex items-center space-x-2">test</div>
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              閉じる
-            </Button>
-          </DialogClose>
-        </DialogFooter>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleEditTodo)}>
+            <TextField
+              name="taskName"
+              type="text"
+              label="タスク名"
+              control={form.control}
+              className="mb-3"
+            />
+            <TextField
+              name="tag"
+              type="text"
+              label="タグ"
+              control={form.control}
+              className="mb-3"
+            />
+            <TextField
+              name="duration"
+              type="text"
+              label="所要時間"
+              control={form.control}
+              className="mb-3"
+            />
+            <TextField
+              name="status"
+              type="text"
+              label="ステータス"
+              control={form.control}
+              className="mb-3"
+            />
+            <DialogFooter className="sm:justify-between">
+              <DialogClose asChild>
+                <Button type="button" variant="secondary">
+                  閉じる
+                </Button>
+              </DialogClose>
+              <Button type="submit">編集</Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );
