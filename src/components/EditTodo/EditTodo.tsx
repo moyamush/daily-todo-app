@@ -9,18 +9,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useEditTodo } from "./useEditTodo";
 import { TextField } from "../TextField/TextField";
 import { Form } from "../ui/form";
+import { SelectField } from "../SelectField/SelectField";
 
 /**
  * TODO編集コンポーネント
  */
 const EditTodo: FC = () => {
-  const { form, handleEditTodo, editOpen, setEditOpen } = useEditTodo();
+  const { form, tags, handleEditTodo, editOpen, handleEditOpenChange } =
+    useEditTodo();
   return (
-    <Dialog open={editOpen} onOpenChange={setEditOpen}>
+    <Dialog open={editOpen} onOpenChange={handleEditOpenChange}>
       <DialogTrigger asChild>
         <Button>編集</Button>
       </DialogTrigger>
@@ -40,10 +42,10 @@ const EditTodo: FC = () => {
               control={form.control}
               className="mb-3"
             />
-            <TextField
+            <SelectField
               name="tag"
-              type="text"
               label="タグ"
+              selectOptions={tags}
               control={form.control}
               className="mb-3"
             />

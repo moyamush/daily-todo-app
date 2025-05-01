@@ -4,14 +4,14 @@ import { withForm } from "@/components/StorybookWithForm";
 import { z } from "zod";
 
 const schema = z.object({
-  example: z.string().min(1, {message: "入力してください"})
-})
+  example: z.string().min(1, { message: "入力してください" }),
+});
 
-type FormSchema = z.infer<typeof schema>
+type FormSchema = z.infer<typeof schema>;
 
 const defaultValues: FormSchema = {
-  example: ""
-}
+  example: "",
+};
 
 const meta = {
   component: TextField,
@@ -28,5 +28,5 @@ export const Default: Story = {
     type: "text",
     label: "example",
   },
-  decorators: [withForm(defaultValues, schema)]
+  decorators: [withForm(defaultValues, schema)],
 };

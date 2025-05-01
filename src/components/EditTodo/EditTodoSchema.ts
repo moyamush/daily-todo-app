@@ -8,7 +8,7 @@ export const editTodoSchema = z.object({
     message: "タスク名を入力してください",
   }),
   tag: z.string().min(1, {
-    message: "タスを選択してください",
+    message: "タグを選択してください",
   }),
   duration: z.string().min(1, {
     message: "所要時間を入力してください",
