@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+"use client";
 import EditTodo from "../EditTodo/EditTodo";
 import { Button } from "../ui/button";
 import {
@@ -8,30 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { useAppStore } from "@/providers/store-provider";
-import { getTodos, TodosRequest, TodosResponse } from "@/api/todos";
-import { format } from "date-fns";
-
+import { useTodoTable } from "./useTodoTable";
 /**
  * TODOテーブルコンポーネント
  */
 export function TodoTable() {
-  // 選択中の日付
-  const { selectedDate } = useAppStore((state) => state);
-  // タスク一覧
-  const [tasks, setTasks] = useState<TodosResponse[]>([]);
-
-  const fetchData = useCallback(async () => {
-    const req: TodosRequest = {
-      date: format(selectedDate, "yyyyMMdd"),
-    };
-    const res = await getTodos(req);
-    setTasks(res);
-  }, [selectedDate]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  // TODO一覧
+  const { todos } = useTodoTable();
 
   return (
     <Table>
@@ -45,13 +28,13 @@ export function TodoTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {tasks.length > 0 &&
-          tasks.map((task) => (
-            <TableRow key={task.id}>
-              <TableCell>{task.taskName}</TableCell>
-              <TableCell>{task.tag}</TableCell>
-              <TableCell>{task.duration}分</TableCell>
-              <TableCell>{task.status}</TableCell>
+        {todos.length > 0 &&
+          todos.map((todo) => (
+            <TableRow key={todo.id}>
+              <TableCell>{todo.taskName}</TableCell>
+              <TableCell>{todo.tag}</TableCell>
+              <TableCell>{todo.duration}分</TableCell>
+              <TableCell>{todo.status}</TableCell>
               <TableCell className="flex gap-2">
                 <EditTodo />
                 <Button>削除</Button>

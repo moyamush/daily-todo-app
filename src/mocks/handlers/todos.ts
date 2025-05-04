@@ -1,15 +1,14 @@
-import { TodosResponse } from "@/api/todos";
+import { TodosResponse } from "@/api/todo/todos";
 import { http, HttpResponse } from "msw";
 
 // ベースURL
 const baseURL = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
-// todosのモックAPI
+// todos一覧取得のモックAPI
 export const todoHandler = [
   http.get(`${baseURL}/todos`, ({ request }) => {
     const url = new URL(request.url);
     const date = url.searchParams.get("date");
-    console.log(date);
     return HttpResponse.json(todosMockData[date ?? ""]);
   }),
 ];

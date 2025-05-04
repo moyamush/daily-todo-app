@@ -3,8 +3,11 @@
 import { Suspense, use } from "react";
 import { handlers } from "@/mocks/index";
 
+// モック状態での起動か
+const isMock = process.env.NEXT_PUBLIC_ENABLE_MOCK === "true";
+
 const mockingEnabledPromise =
-  typeof window !== "undefined"
+  typeof window !== "undefined" && isMock
     ? import("@/mocks/browser").then(async ({ worker }) => {
         await worker.start({
           onUnhandledRequest(request, print) {

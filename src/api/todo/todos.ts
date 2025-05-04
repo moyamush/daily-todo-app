@@ -1,7 +1,7 @@
 import { apiClient } from "@/lib/api/api-client";
 
-// ベースURL
-const baseURL = process.env.NEXT_PUBLIC_API_ENDPOINT;
+// リソース
+const RESOUECE = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/get-todos`;
 
 // リクエストインターフェース
 export interface TodosRequest {
@@ -18,7 +18,7 @@ export interface TodosResponse {
   // タグ
   tag: string;
   // 所要時間
-  duration: number;
+  duration: string;
   // ステータス
   status: string;
 }
@@ -27,7 +27,7 @@ export interface TodosResponse {
 export const getTodos = async (
   params: TodosRequest,
 ): Promise<TodosResponse[]> => {
-  return await apiClient.get(`${baseURL}/todos`, {
+  return await apiClient.get(RESOUECE, {
     params,
   });
 };

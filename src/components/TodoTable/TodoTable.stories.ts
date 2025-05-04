@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { TodoTable } from "./TodoTable";
-import { TodosResponse } from "@/api/todos";
+import { TodosResponse } from "@/api/todo/todos";
 import { http, HttpResponse } from "msw";
 
 // ベースURL
