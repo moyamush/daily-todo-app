@@ -6,9 +6,13 @@ const RESOUECE = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/get-tags`;
 // レスポンスインターフェース
 export interface TagsResponse {
   // id
-  id: number;
+  id: string;
   // タグ名
   tagName: string;
+  // カラー
+  tagColor: string;
+  // ソート
+  sort: number;
 }
 
 // Tagの取得

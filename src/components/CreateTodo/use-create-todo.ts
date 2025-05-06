@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { createTodoSchema, CreateTodoSchema } from "./createTodoSchema";
+import { createTodoSchema, CreateTodoSchema } from "./create-todo-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useState } from "react";
 import { SelectOption } from "../SelectField/SelectField";
@@ -7,6 +7,7 @@ import { getTags } from "@/api/tag/tags";
 import { createTodo, CreateTodoRequest } from "@/api/todo/create-todo";
 import { useAppStore } from "@/providers/store-provider";
 import { format } from "date-fns";
+import useGetTags from "@/hooks/use-get-tags";
 
 /**
  * TODO追加カスタムフック
@@ -14,6 +15,8 @@ import { format } from "date-fns";
 export const useCreateTodo = () => {
   // 選択中の日付
   const { selectedDate } = useAppStore((state) => state);
+  // タグ一覧
+  const { tagOptions } = useGetTags();
 
   // フォーム初期化
   const form = useForm<CreateTodoSchema>({
@@ -25,24 +28,6 @@ export const useCreateTodo = () => {
       status: "",
     },
   });
-
-  // タグ一覧
-  const [tags, setTags] = useState<SelectOption[]>([]);
-  // タグ一覧取得
-  const fetchTags = useCallback(async () => {
-    try {
-      const res = await getTags();
-      setTags(
-        res.map((item) => {
-          return { label: item.tagName, value: item.id.toString() };
-        }),
-      );
-    } catch (err) {}
-  }, []);
-
-  useEffect(() => {
-    fetchTags();
-  }, [fetchTags]);
 
   // 追加ダイアログの開閉
   const [createOpen, setCreateOpen] = useState<boolean>(false);
@@ -80,7 +65,7 @@ export const useCreateTodo = () => {
 
   return {
     form,
-    tags,
+    tagOptions,
     handleCreateTodo,
     createOpen,
     handleCreateOpenChange,

@@ -1,5 +1,8 @@
 import { useRouter } from "next/navigation";
-import { loginFormSchema, LoginFormSchema } from "../_schemas/loginFormSchema";
+import {
+  loginFormSchema,
+  LoginFormSchema,
+} from "../_schemas/login-form-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 

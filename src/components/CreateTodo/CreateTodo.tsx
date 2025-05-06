@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FC } from "react";
-import { useCreateTodo } from "./useCreateTodo";
+import { useCreateTodo } from "./use-create-todo";
 import { Form } from "../ui/form";
 import { TextField } from "../TextField/TextField";
 import { SelectField } from "../SelectField/SelectField";
@@ -19,8 +19,13 @@ import { SelectField } from "../SelectField/SelectField";
  * TODO追加コンポーネント
  */
 const CreateTodo: FC = () => {
-  const { form, tags, handleCreateTodo, createOpen, handleCreateOpenChange } =
-    useCreateTodo();
+  const {
+    form,
+    tagOptions,
+    handleCreateTodo,
+    createOpen,
+    handleCreateOpenChange,
+  } = useCreateTodo();
   return (
     <Dialog open={createOpen} onOpenChange={handleCreateOpenChange}>
       <DialogTrigger asChild>
@@ -45,7 +50,7 @@ const CreateTodo: FC = () => {
             <SelectField
               name="tag"
               label="タグ"
-              selectOptions={tags}
+              selectOptions={tagOptions}
               control={form.control}
               className="mb-3"
             />

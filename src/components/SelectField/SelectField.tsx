@@ -14,11 +14,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { Badge } from "../ui/badge";
 
 // セレクトオプションのインターフェース
 export interface SelectOption {
   // ラベル
   label: string;
+  // ラベルカラー
+  labelColor?: string;
   // 値
   value: string;
 }
@@ -65,11 +68,20 @@ export function SelectField<T extends FieldValues>({
               <SelectContent>
                 <SelectGroup>
                   {selectOptions.length > 0 &&
-                    selectOptions.map((item) => (
-                      <SelectItem key={item.value} value={item.value}>
-                        {item.label}
-                      </SelectItem>
-                    ))}
+                    selectOptions.map((item) => {
+                      return (
+                        <SelectItem key={item.value} value={item.value}>
+                          {item.labelColor && (
+                            <Badge
+                              className={`${item.labelColor ?? "bg-white"} text-black`}
+                            >
+                              {item.label}
+                            </Badge>
+                          )}
+                          {!item.labelColor && item.label}
+                        </SelectItem>
+                      );
+                    })}
                 </SelectGroup>
               </SelectContent>
             </Select>

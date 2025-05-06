@@ -4,7 +4,7 @@ import { FC } from "react";
 import { TextField } from "@/components/TextField/TextField";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useLoginForm } from "../_hooks/useLoginForm";
+import { useLoginForm } from "../_hooks/use-login-form";
 
 /**
  * ログインフォーム

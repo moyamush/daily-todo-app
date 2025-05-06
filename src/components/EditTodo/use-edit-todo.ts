@@ -3,12 +3,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useState } from "react";
 import { SelectOption } from "../SelectField/SelectField";
 import { getTags } from "@/api/tag/tags";
-import { editTodoSchema, EditTodoSchema } from "./editTodoSchema";
+import { editTodoSchema, EditTodoSchema } from "./edit-todo-schema";
+import useGetTags from "@/hooks/use-get-tags";
 
 /**
  * TODO編集カスタムフック
  */
 export const useEditTodo = () => {
+  // タグ一覧
+  const { tagOptions } = useGetTags();
+
   // フォーム初期化
   const form = useForm<EditTodoSchema>({
     resolver: zodResolver(editTodoSchema),
@@ -19,24 +23,6 @@ export const useEditTodo = () => {
       status: "",
     },
   });
-
-  // タグ一覧
-  const [tags, setTags] = useState<SelectOption[]>([]);
-  // タグ一覧取得
-  const fetchTags = useCallback(async () => {
-    try {
-      const res = await getTags();
-      setTags(
-        res.map((item) => {
-          return { label: item.tagName, value: item.id.toString() };
-        }),
-      );
-    } catch (err) {}
-  }, []);
-
-  useEffect(() => {
-    fetchTags();
-  }, [fetchTags]);
 
   // 編集ダイアログの開閉
   const [editOpen, setEditOpen] = useState<boolean>(false);
@@ -64,7 +50,7 @@ export const useEditTodo = () => {
 
   return {
     form,
-    tags,
+    tagOptions,
     handleEditTodo,
     editOpen,
     handleEditOpenChange,
