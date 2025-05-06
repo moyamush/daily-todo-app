@@ -18,7 +18,9 @@ export const useTodoTable = () => {
       };
       const res = await getTodos(req);
       setTodos(res);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   }, [selectedDate]);
 
   useEffect(() => {

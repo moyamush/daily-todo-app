@@ -1,0 +1,22 @@
+version: 0.2
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - echo aws --version
+      - echo node --version
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - npm install
+  build:
+    on-failure: ABORT
+    commands:
+      - npm run build
+  post_build:
+    on-failure: ABORT
+    commands:
+      - aws s3 sync out/ s3://$S3_BUCKET_NAME/ --delete
+      - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"

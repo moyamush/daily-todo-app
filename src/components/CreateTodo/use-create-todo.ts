@@ -1,13 +1,11 @@
 import { useForm } from "react-hook-form";
 import { createTodoSchema, CreateTodoSchema } from "./create-todo-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback, useEffect, useState } from "react";
-import { SelectOption } from "../SelectField/SelectField";
-import { getTags } from "@/api/tag/tags";
 import { createTodo, CreateTodoRequest } from "@/api/todo/create-todo";
 import { useAppStore } from "@/providers/store-provider";
 import { format } from "date-fns";
 import useGetTags from "@/hooks/use-get-tags";
+import { useState } from "react";
 
 /**
  * TODO追加カスタムフック
@@ -44,7 +42,10 @@ export const useCreateTodo = () => {
         status: formData.status,
       };
       const res = await createTodo(req);
-    } catch (err) {}
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
 
     // 追加ダイアログを閉じる
     setCreateOpen(false);

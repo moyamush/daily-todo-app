@@ -13,7 +13,7 @@ export function withForm<T extends FieldValues>(
   defaultValues: DefaultValues<T>,
   schema: ZodSchema<T>,
 ) {
-  return (Story: () => ReactNode) => {
+  const WithFormHOC = (Story: () => ReactNode) => {
     const methods = useForm<T>({
       resolver: zodResolver(schema),
       defaultValues,
@@ -34,4 +34,8 @@ export function withForm<T extends FieldValues>(
       </FormProvider>
     );
   };
+
+  WithFormHOC.displayName = "WithFormHOC";
+
+  return WithFormHOC;
 }

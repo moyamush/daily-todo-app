@@ -21,7 +21,9 @@ export default function useGetTags() {
           };
         }),
       );
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   useEffect(() => {

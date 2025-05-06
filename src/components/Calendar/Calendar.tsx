@@ -1,4 +1,3 @@
-import { Dispatch, FC, SetStateAction } from "react";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
 import "react-day-picker/style.css";
 import { ja } from "react-day-picker/locale";

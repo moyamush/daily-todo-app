@@ -2,7 +2,6 @@
 import { Calendar } from "@/components/Calendar/Calendar";
 import CreateTodo from "@/components/CreateTodo/CreateTodo";
 import { TodoTable } from "@/components/TodoTable/TodoTable";
-import { useLogout } from "@/hooks/use-logout";
 import { useAppStore } from "@/providers/store-provider";
 import { format } from "date-fns";
 import { FC } from "react";
