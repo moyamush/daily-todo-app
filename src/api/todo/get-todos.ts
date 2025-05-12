@@ -4,13 +4,13 @@ import { apiClient } from "@/lib/api/api-client";
 const RESOUECE = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/get-todos`;
 
 // リクエストインターフェース
-export interface TodosRequest {
+export interface GetTodosRequest {
   // 日付
   date: string;
 }
 
 // レスポンスインターフェース
-export interface TodosResponse {
+export interface GetTodosResponse {
   // id
   id: number;
   // タスク名
@@ -23,10 +23,10 @@ export interface TodosResponse {
   status: string;
 }
 
-// Todoの取得
+// Todo一覧の取得
 export const getTodos = async (
-  params: TodosRequest,
-): Promise<TodosResponse[]> => {
+  params: GetTodosRequest,
+): Promise<GetTodosResponse[]> => {
   return await apiClient.get(RESOUECE, {
     params,
   });

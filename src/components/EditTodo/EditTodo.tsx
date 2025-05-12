@@ -19,8 +19,14 @@ import { SelectField } from "../SelectField/SelectField";
  * TODO編集コンポーネント
  */
 const EditTodo: FC = () => {
-  const { form, tagOptions, handleEditTodo, editOpen, handleEditOpenChange } =
-    useEditTodo();
+  const {
+    form,
+    tagOptions,
+    statusOptions,
+    handleEditTodo,
+    editOpen,
+    handleEditOpenChange,
+  } = useEditTodo();
   return (
     <Dialog open={editOpen} onOpenChange={handleEditOpenChange}>
       <DialogTrigger asChild>
@@ -56,10 +62,10 @@ const EditTodo: FC = () => {
               control={form.control}
               className="mb-3"
             />
-            <TextField
+            <SelectField
               name="status"
-              type="text"
               label="ステータス"
+              selectOptions={statusOptions}
               control={form.control}
               className="mb-3"
             />

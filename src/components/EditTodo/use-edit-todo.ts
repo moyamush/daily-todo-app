@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { editTodoSchema, EditTodoSchema } from "./edit-todo-schema";
 import useGetTags from "@/hooks/use-get-tags";
 import { useState } from "react";
+import useGetStatuses from "@/hooks/use-get-statuses";
 
 /**
  * TODO編集カスタムフック
@@ -10,6 +11,8 @@ import { useState } from "react";
 export const useEditTodo = () => {
   // タグ一覧
   const { tagOptions } = useGetTags();
+  // ステータス一覧の取得
+  const { statusOptions } = useGetStatuses();
 
   // フォーム初期化
   const form = useForm<EditTodoSchema>({
@@ -49,6 +52,7 @@ export const useEditTodo = () => {
   return {
     form,
     tagOptions,
+    statusOptions,
     handleEditTodo,
     editOpen,
     handleEditOpenChange,

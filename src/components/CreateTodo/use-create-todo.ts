@@ -6,6 +6,7 @@ import { useAppStore } from "@/providers/store-provider";
 import { format } from "date-fns";
 import useGetTags from "@/hooks/use-get-tags";
 import { useState } from "react";
+import useGetStatuses from "@/hooks/use-get-statuses";
 
 /**
  * TODO追加カスタムフック
@@ -15,6 +16,8 @@ export const useCreateTodo = () => {
   const { selectedDate } = useAppStore((state) => state);
   // タグ一覧
   const { tagOptions } = useGetTags();
+  // ステータス一覧の取得
+  const { statusOptions } = useGetStatuses();
 
   // フォーム初期化
   const form = useForm<CreateTodoSchema>({
@@ -67,6 +70,7 @@ export const useCreateTodo = () => {
   return {
     form,
     tagOptions,
+    statusOptions,
     handleCreateTodo,
     createOpen,
     handleCreateOpenChange,

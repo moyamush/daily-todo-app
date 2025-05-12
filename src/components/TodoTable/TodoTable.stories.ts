@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { TodoTable } from "./TodoTable";
-import { TodosResponse } from "@/api/todo/todos";
 import { http, HttpResponse } from "msw";
-import { TagsResponse } from "@/api/tag/tags";
+import { GetTagsResponse } from "@/api/tag/get-tags";
+import { GetTodosResponse } from "@/api/todo/get-todos";
 
 // ベースURL
 const baseURL = process.env.NEXT_PUBLIC_API_ENDPOINT;
@@ -33,14 +33,14 @@ export default meta;
 type Story = StoryObj<typeof TodoTable>;
 export const Default: Story = {};
 
-const tagsMockData: TagsResponse[] = [
+const tagsMockData: GetTagsResponse[] = [
   { id: "1", tagName: "プログラミング", tagColor: "bg-blue-100", sort: 1 },
   { id: "2", tagName: "読書", tagColor: "bg-yellow-100", sort: 2 },
   { id: "3", tagName: "運動", tagColor: "bg-green-100", sort: 3 },
   { id: "4", tagName: "料理", tagColor: "bg-pink-100", sort: 4 },
 ];
 
-export const todosMockData: Record<string, TodosResponse[]> = {
+export const todosMockData: Record<string, GetTodosResponse[]> = {
   "2025-04-28": [
     {
       id: 1,

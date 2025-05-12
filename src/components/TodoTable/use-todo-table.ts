@@ -1,4 +1,8 @@
-import { getTodos, TodosRequest, TodosResponse } from "@/api/todo/todos";
+import {
+  getTodos,
+  GetTodosRequest,
+  GetTodosResponse,
+} from "@/api/todo/get-todos";
 import { useAppStore } from "@/providers/store-provider";
 import { format } from "date-fns";
 import { useCallback, useEffect, useState } from "react";
@@ -10,10 +14,10 @@ export const useTodoTable = () => {
   // 選択中の日付
   const { selectedDate } = useAppStore((state) => state);
   // タスク一覧
-  const [todos, setTodos] = useState<TodosResponse[]>([]);
+  const [todos, setTodos] = useState<GetTodosResponse[]>([]);
   const fetchData = useCallback(async () => {
     try {
-      const req: TodosRequest = {
+      const req: GetTodosRequest = {
         date: format(selectedDate, "yyyy-MM-dd"),
       };
       const res = await getTodos(req);

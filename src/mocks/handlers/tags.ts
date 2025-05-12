@@ -1,4 +1,4 @@
-import { TagsResponse } from "@/api/tag/tags";
+import { TagsResponse } from "@/api/tag/get-tags";
 import { http, HttpResponse } from "msw";
 
 // ベースURL

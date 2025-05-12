@@ -22,6 +22,7 @@ const CreateTodo: FC = () => {
   const {
     form,
     tagOptions,
+    statusOptions,
     handleCreateTodo,
     createOpen,
     handleCreateOpenChange,
@@ -61,10 +62,10 @@ const CreateTodo: FC = () => {
               control={form.control}
               className="mb-3"
             />
-            <TextField
+            <SelectField
               name="status"
-              type="text"
               label="ステータス"
+              selectOptions={statusOptions}
               control={form.control}
               className="mb-3"
             />

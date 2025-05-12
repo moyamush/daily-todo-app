@@ -4,7 +4,7 @@ import { apiClient } from "@/lib/api/api-client";
 const RESOUECE = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/get-tags`;
 
 // レスポンスインターフェース
-export interface TagsResponse {
+export interface GetTagsResponse {
   // id
   id: string;
   // タグ名
@@ -15,7 +15,7 @@ export interface TagsResponse {
   sort: number;
 }
 
-// Tagの取得
-export const getTags = async (): Promise<TagsResponse[]> => {
+// タグ一覧の取得
+export const getTags = async (): Promise<GetTagsResponse[]> => {
   return await apiClient.get(RESOUECE);
 };
