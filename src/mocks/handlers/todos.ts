@@ -1,4 +1,4 @@
-import { TodosResponse } from "@/api/todo/get-todos";
+import { GetTodosResponse } from "@/api/todo/get-todos";
 import { http, HttpResponse } from "msw";
 
 // ベースURL
@@ -13,7 +13,7 @@ export const todoHandler = [
   }),
 ];
 
-export const todosMockData: Record<string, TodosResponse[]> = {
+export const todosMockData: Record<string, GetTodosResponse[]> = {
   "2025-04-28": [
     {
       id: 1,

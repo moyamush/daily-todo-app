@@ -1,4 +1,4 @@
-import { TagsResponse } from "@/api/tag/get-tags";
+import { GetTagsResponse } from "@/api/tag/get-tags";
 import { http, HttpResponse } from "msw";
 
 // ベースURL
@@ -11,7 +11,7 @@ export const tagHandler = [
   }),
 ];
 
-const tagsMockData: TagsResponse[] = [
+const tagsMockData: GetTagsResponse[] = [
   { id: "1", tagName: "プログラミング", tagColor: "bg-blue-100", sort: 1 },
   { id: "2", tagName: "読書", tagColor: "bg-yellow-100", sort: 2 },
   { id: "3", tagName: "運動", tagColor: "bg-green-100", sort: 3 },

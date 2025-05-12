@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DaliyTodoApp
+このリポジトリはDailyTodoAppのフロントエンドのリポジトリです。
 
-## Getting Started
+## 環境構築
+### モック環境での実行の場合
+1. `npm install`
+2. `npm run mock`
+3. `npm run storybook`（storybook起動の場合）
 
-First, run the development server:
+### AWS上のAPIと接続の場合
+#### インフラ環境の構築
+1. [DailyTodoAppInfra](https://github.com/moyamush/daily-todo-app-infra.git)をクローン
+2. インフラ環境の構築（詳細は1のREADME.mdを参照）
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+#### フロントエンドの構築
+1. `npm install`
+2. `.env/.env.dev`の`NEXT_PUBLIC_API_ENDPOINT`を上記で構築したインフラ環境のAPIのエンドポイントに変更
+2. `npm run dev`
+3. `npm run storybook`（storybook起動の場合）
+
+## フォルダ構成
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+daily-todo-app                   : ルートディレクトリ
+├── public                       
+└── src                          
+    ├── api                      : APIエンドポイントの管理
+    │   ├── status
+    │   ├── tag
+    │   ├── todo
+    │   └── ...
+    ├── app                      : ページを管理
+    │   └── (auth)               : 認証系のページを管理
+    │       └── sign-in
+    │           ├── _components  : 画面特有のコンポーネントを管理
+    │           ├── _hooks       : カスタムフックを管理
+    │           └── _schemas     : スキーマを管理
+    ├── components               : アプリ共通のコンポーネントを管理
+    │   ├── Calendar
+    │   ├── CreateTodo
+    │   ├── EditTodo
+    │   ├── HomeHeader
+    │   ├── PageTitle
+    │   ├── SelectField
+    │   ├── TextField
+    │   ├── TodoTable
+    │   ├── ui
+    │   └── ...
+    ├── hooks                    : アプリ共通のカスタムフックを管理
+    ├── lib                      : 共通ライブラリを管理
+    │   ├── api
+    │   └── ...
+    ├── mocks                    : MSWのモックを管理
+    │   └── handlers
+    ├── providers                : コンテキストを管理
+    └── stores                   : 状態管理を管理
+```
