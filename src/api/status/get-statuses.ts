@@ -3,6 +3,12 @@ import { apiClient } from "@/lib/api/api-client";
 // リソース
 const RESOUECE = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/get-statuses`;
 
+// リクエストインターフェース
+export interface GetStatusesRequest {
+  // ユーザID
+  userId: string;
+}
+
 // レスポンスインターフェース
 export interface GetStatusesResponse {
   // id
@@ -16,6 +22,8 @@ export interface GetStatusesResponse {
 }
 
 // ステータス一覧の取得
-export const getStatuses = async (): Promise<GetStatusesResponse[]> => {
-  return await apiClient.get(RESOUECE);
+export const getStatuses = async (
+  request: GetStatusesRequest,
+): Promise<GetStatusesResponse[]> => {
+  return await apiClient.get(RESOUECE, { params: request });
 };

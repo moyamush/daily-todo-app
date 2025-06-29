@@ -1,5 +1,10 @@
-import { getStatuses, GetStatusesResponse } from "@/api/status/get-statuses";
+import {
+  getStatuses,
+  GetStatusesRequest,
+  GetStatusesResponse,
+} from "@/api/status/get-statuses";
 import { SelectOption } from "@/components/SelectField/SelectField";
+import { useAppStore } from "@/providers/store-provider";
 import { useCallback, useEffect, useState } from "react";
 
 /**
@@ -8,9 +13,19 @@ import { useCallback, useEffect, useState } from "react";
 export default function useGetStatuses() {
   const [statuses, setStatuses] = useState<GetStatusesResponse[]>([]);
   const [statusOptions, setStatusOptions] = useState<SelectOption[]>([]);
+
+  // ログイン中のユーザID取得
+  const { user } = useAppStore((state) => state);
+
   const fetchData = useCallback(async () => {
     try {
-      const res: GetStatusesResponse[] = await getStatuses();
+      // リクエスト作成
+      const request: GetStatusesRequest = {
+        userId: user?.getUsername() ?? "",
+      };
+
+      // レスポンス取得
+      const res: GetStatusesResponse[] = await getStatuses(request);
       setStatuses(res);
       setStatusOptions(
         res.map((item) => {
@@ -24,7 +39,7 @@ export default function useGetStatuses() {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     fetchData();

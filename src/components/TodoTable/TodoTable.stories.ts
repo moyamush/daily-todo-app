@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import { TodoTable } from "./TodoTable";
 import { http, HttpResponse } from "msw";
 import { GetTagsResponse } from "@/api/tag/get-tags";

@@ -5,6 +5,7 @@ import { MSWProvider } from "@/providers/msw-provider";
 import { StoreProvider } from "@/providers/store-provider";
 import { HomeHeader } from "@/components/HomeHeader/HomeHeader";
 import { useLogout } from "@/hooks/use-logout";
+import { AuthProvider } from "@/providers/auth-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,8 +32,10 @@ export default function RootLayout({
       >
         <StoreProvider>
           <MSWProvider>
-            <HomeHeader onLogout={handleLogout} />
-            {children}
+            <AuthProvider>
+              <HomeHeader onLogout={handleLogout} />
+              {children}
+            </AuthProvider>
           </MSWProvider>
         </StoreProvider>
       </body>

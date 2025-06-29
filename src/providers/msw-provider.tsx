@@ -22,6 +22,9 @@ const mockingEnabledPromise =
       })
     : Promise.resolve();
 
+/**
+ * MSVプロバイダー
+ */
 export function MSWProvider({
   children,
 }: Readonly<{

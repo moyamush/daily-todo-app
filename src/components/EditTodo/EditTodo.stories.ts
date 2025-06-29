@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import EditTodo from "./EditTodo";
 import { http, HttpResponse } from "msw";
 import { GetTagsResponse } from "@/api/tag/get-tags";

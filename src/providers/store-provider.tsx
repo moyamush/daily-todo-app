@@ -12,6 +12,9 @@ export interface StoreProviderProps {
   children: ReactNode;
 }
 
+/**
+ * 状態管理プロバイダー
+ */
 export const StoreProvider = ({ children }: StoreProviderProps) => {
   const storeRef = useRef<StoreApi | null>(null);
   if (storeRef.current === null) {

@@ -3,6 +3,12 @@ import { apiClient } from "@/lib/api/api-client";
 // リソース
 const RESOUECE = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/get-tags`;
 
+// リクエストインターフェース
+export interface GetTagsRequest {
+  // ユーザID
+  userId: string;
+}
+
 // レスポンスインターフェース
 export interface GetTagsResponse {
   // id
@@ -16,6 +22,8 @@ export interface GetTagsResponse {
 }
 
 // タグ一覧の取得
-export const getTags = async (): Promise<GetTagsResponse[]> => {
-  return await apiClient.get(RESOUECE);
+export const getTags = async (
+  request: GetTagsRequest,
+): Promise<GetTagsResponse[]> => {
+  return await apiClient.get(RESOUECE, { params: request });
 };

@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react";
+import { Meta } from "@storybook/nextjs";
 import { useState } from "react";
 import { Calendar } from "./Calendar";
 

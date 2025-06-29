@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { TextField } from "./TextField";
 import { withForm } from "@/components/StorybookWithForm";
 import { z } from "zod";
