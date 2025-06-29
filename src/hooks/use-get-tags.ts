@@ -34,7 +34,7 @@ export default function useGetTags() {
         }),
       );
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }, [user]);
 

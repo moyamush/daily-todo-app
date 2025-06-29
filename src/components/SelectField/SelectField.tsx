@@ -71,14 +71,15 @@ export function SelectField<T extends FieldValues>({
                     selectOptions.map((item) => {
                       return (
                         <SelectItem key={item.value} value={item.value}>
-                          {item.labelColor && (
+                          {item.labelColor ? (
                             <Badge
                               className={`${item.labelColor ?? "bg-white"} text-black`}
                             >
                               {item.label}
                             </Badge>
+                          ) : (
+                            item.label
                           )}
-                          {!item.labelColor && item.label}
                         </SelectItem>
                       );
                     })}

@@ -37,9 +37,9 @@ export const useConfirmCode = () => {
     }
     try {
       await new Promise<void>((resolve, reject) => {
-        user.confirmRegistration(formData.code, true, (err, result) => {
+        user.confirmRegistration(formData.code, true, (err) => {
           if (err) {
-            console.log(err);
+            console.error(err);
             return reject(err);
           }
           resolve();
@@ -47,7 +47,7 @@ export const useConfirmCode = () => {
       });
       router.push("/sign-in");
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setMessage("メールアドレスの検証に失敗しました");
     }
   };

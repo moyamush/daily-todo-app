@@ -35,7 +35,6 @@ export const useCreateTodo = () => {
 
   // TODOの追加
   const handleCreateTodo = async (formData: CreateTodoSchema) => {
-    console.log(formData);
     try {
       const req: CreateTodoRequest = {
         selectedDate: format(selectedDate, "yyyy-MM-dd"),
@@ -44,10 +43,9 @@ export const useCreateTodo = () => {
         duration: formData.duration,
         status: formData.status,
       };
-      const res = await createTodo(req);
-      console.log(res);
+      await createTodo(req);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
 
     // 追加ダイアログを閉じる

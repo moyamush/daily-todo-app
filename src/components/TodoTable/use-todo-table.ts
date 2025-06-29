@@ -23,7 +23,7 @@ export const useTodoTable = () => {
       const res = await getTodos(req);
       setTodos(res);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }, [selectedDate]);
 

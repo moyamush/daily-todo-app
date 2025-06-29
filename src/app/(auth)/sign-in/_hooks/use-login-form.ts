@@ -60,7 +60,6 @@ export const useLoginForm = () => {
             reject(err);
           },
           newPasswordRequired: () => {
-            console.log("パスワードの変更が必要です");
             setUser(user);
             router.push("/new-change-password");
           },
@@ -68,7 +67,7 @@ export const useLoginForm = () => {
       });
       router.push("/");
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setMessage(
         "ログインに失敗しました。IDまたはパスワードを確認してください。",
       );

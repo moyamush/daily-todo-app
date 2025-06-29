@@ -1,7 +1,6 @@
 "use client";
 import { FC } from "react";
 import LoginForm from "./_components/LoginForm";
-import Link from "next/link";
 
 /**
  * ログインページ

@@ -37,7 +37,7 @@ export default function useGetStatuses() {
         }),
       );
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }, [user]);
 
