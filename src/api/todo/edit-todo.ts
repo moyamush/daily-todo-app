@@ -5,8 +5,12 @@ const RESOUECE = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/edit-todo`;
 
 // リクエストインターフェース
 export interface EditTodoRequest {
-  // id
-  id: number;
+  // ユーザID
+  userId: string;
+  // 選択中の日付
+  selectedDate: string;
+  // タスクID
+  taskId: string;
   // タスク名
   taskName: string;
   // タグ
@@ -24,7 +28,7 @@ export interface EditTodoResponse {
 }
 
 // Todoの編集
-export const editTodos = async (
+export const editTodo = async (
   params: EditTodoRequest,
 ): Promise<EditTodoResponse[]> => {
   return await apiClient.post(RESOUECE, params);

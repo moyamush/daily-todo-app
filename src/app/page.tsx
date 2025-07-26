@@ -44,7 +44,7 @@ const Page: FC = () => {
               onCreated={handleFetchTodo}
             />
           </div>
-          <TodoTable todos={todos} />
+          <TodoTable todos={todos} onFetchTodo={handleFetchTodo} />
         </div>
       </div>
     </>

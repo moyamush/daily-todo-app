@@ -5,6 +5,8 @@ const RESOUECE = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/create-todo`;
 
 // リクエストインターフェース
 export interface CreateTodoRequest {
+  // ユーザID
+  userId: string;
   // 選択した日付
   selectedDate: string;
   // タスク名
@@ -20,7 +22,7 @@ export interface CreateTodoRequest {
 // レスポンスインターフェース
 export interface CreateTodoResponse {
   // id
-  id: number;
+  id: string;
 }
 
 // Todoの追加

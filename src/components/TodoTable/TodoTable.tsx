@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "../ui/button";
 import {
   Table,
   TableBody,
@@ -16,18 +15,20 @@ import { EditTodo } from "../EditTodo/EditTodo";
 import { useTagStore } from "@/stores/tag-store";
 import { useUserStore } from "@/stores/user-store";
 import { useStatusStore } from "@/stores/status-store";
+import { DeleteTodo } from "../DeleteTodo/DeleteTodo";
 
 /**
  * TODOテーブルコンポーネントインターフェース
  */
 interface TodoTableProps {
   todos: GetTodosResponse[];
+  onFetchTodo?: (date: Date) => Promise<void>;
 }
 
 /**
  * TODOテーブルコンポーネント
  */
-export function TodoTable({ todos }: TodoTableProps) {
+export function TodoTable({ todos, onFetchTodo }: TodoTableProps) {
   const user = useUserStore((state) => state.user);
 
   // タグ一覧
@@ -96,8 +97,8 @@ export function TodoTable({ todos }: TodoTableProps) {
                   )}
                 </TableCell>
                 <TableCell className="flex gap-2">
-                  <EditTodo />
-                  <Button>削除</Button>
+                  <EditTodo todo={todo} onEdited={onFetchTodo} />
+                  <DeleteTodo taskId={todo.id} onDeleted={onFetchTodo} />
                 </TableCell>
               </TableRow>
             );

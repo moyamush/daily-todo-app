@@ -6,11 +6,14 @@ import { format } from "date-fns";
 import { useState } from "react";
 import { useTagStore } from "@/stores/tag-store";
 import { useStatusStore } from "@/stores/status-store";
+import { useUserStore } from "@/stores/user-store";
 
 /**
  * TODO追加カスタムフック
  */
 export const useCreateTodo = () => {
+  // ログイン中のユーザ
+  const user = useUserStore((state) => state.user);
   // タグ一覧
   const tagOptions = useTagStore((state) => state.tagOptions);
   // ステータス一覧の取得
@@ -34,10 +37,11 @@ export const useCreateTodo = () => {
   const handleCreateTodo = async (
     selectedDate: Date,
     formData: CreateTodoSchema,
-    onCreated?: (date: Date) => void,
+    onCreated?: (date: Date) => Promise<void>,
   ) => {
     try {
       const req: CreateTodoRequest = {
+        userId: user?.getUsername() ?? "",
         selectedDate: format(selectedDate, "yyyy-MM-dd"),
         taskName: formData.taskName,
         tag: formData.tag,
@@ -45,7 +49,7 @@ export const useCreateTodo = () => {
         status: formData.status,
       };
       await createTodo(req);
-      onCreated?.(selectedDate);
+      await onCreated?.(selectedDate);
     } catch (err) {
       console.error(err);
     }

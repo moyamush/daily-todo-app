@@ -5,6 +5,8 @@ const RESOUECE = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/get-todos`;
 
 // リクエストインターフェース
 export interface GetTodosRequest {
+  // ユーザID
+  userId: string;
   // 日付
   date: string;
 }
@@ -12,7 +14,7 @@ export interface GetTodosRequest {
 // レスポンスインターフェース
 export interface GetTodosResponse {
   // id
-  id: number;
+  id: string;
   // タスク名
   taskName: string;
   // タグ

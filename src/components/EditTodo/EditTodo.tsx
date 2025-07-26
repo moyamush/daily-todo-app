@@ -13,11 +13,20 @@ import { useEditTodo } from "./use-edit-todo";
 import { TextField } from "../TextField/TextField";
 import { Form } from "../ui/form";
 import { SelectField } from "../SelectField/SelectField";
+import { GetTodosResponse } from "@/api/todo/get-todos";
+
+/**
+ * TODO編集コンポーネントインターフェース
+ */
+interface EditTodoProps {
+  todo: GetTodosResponse;
+  onEdited?: (date: Date) => Promise<void>;
+}
 
 /**
  * TODO編集コンポーネント
  */
-export function EditTodo() {
+export function EditTodo({ todo, onEdited }: EditTodoProps) {
   const {
     form,
     tagOptions,
@@ -25,7 +34,7 @@ export function EditTodo() {
     handleEditTodo,
     editOpen,
     handleEditOpenChange,
-  } = useEditTodo();
+  } = useEditTodo(todo);
   return (
     <Dialog open={editOpen} onOpenChange={handleEditOpenChange}>
       <DialogTrigger asChild>
@@ -39,7 +48,11 @@ export function EditTodo() {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleEditTodo)}>
+          <form
+            onSubmit={form.handleSubmit((formData) =>
+              handleEditTodo(formData, onEdited),
+            )}
+          >
             <TextField
               name="taskName"
               type="text"
