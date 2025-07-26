@@ -5,7 +5,7 @@ import {
 } from "../_schemas/new-change-password-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useAppStore } from "@/providers/store-provider";
+import { useUserStore } from "@/stores/user-store";
 
 /**
  * 初回パスワード変更カスタムフック
@@ -21,7 +21,7 @@ export const useNewChangePassword = () => {
 
   const router = useRouter();
 
-  const { user } = useAppStore((state) => state);
+  const user = useUserStore((state) => state.user);
 
   // 初回パスワード変更
   const handleNewChangePassword = async (formData: NewChangePasswordSchema) => {

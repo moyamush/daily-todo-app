@@ -27,6 +27,7 @@ export interface GetTodosResponse {
 export const getTodos = async (
   params: GetTodosRequest,
 ): Promise<GetTodosResponse[]> => {
+  console.log("called get todo");
   return await apiClient.get(RESOUECE, {
     params,
   });

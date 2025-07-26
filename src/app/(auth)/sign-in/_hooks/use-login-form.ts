@@ -7,8 +7,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userPool } from "@/lib/aws/cognito";
 import { useState } from "react";
-import { useAppStore } from "@/providers/store-provider";
 import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
+import { useUserStore } from "@/stores/user-store";
+import { useAuthStore } from "@/stores/auth-store";
 
 /**
  * ログインページカスタムフック
@@ -25,10 +26,10 @@ export const useLoginForm = () => {
 
   const router = useRouter();
 
-  const { setUser } = useAppStore((state) => state);
+  const setUser = useUserStore((state) => state.setUser);
 
   // JWTトークン
-  const { setToken } = useAppStore((state) => state);
+  const setToken = useAuthStore((state) => state.setToken);
 
   // メッセージ
   const [message, setMessage] = useState<string | null>(null);

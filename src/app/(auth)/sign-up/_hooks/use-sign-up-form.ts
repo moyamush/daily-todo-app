@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { userPool } from "@/lib/aws/cognito";
 import { CognitoUser } from "amazon-cognito-identity-js";
-import { useAppStore } from "@/providers/store-provider";
 import { useState } from "react";
+import { useUserStore } from "@/stores/user-store";
 
 /**
  * サインアップカスタムフック
@@ -25,7 +25,7 @@ export const useSignUpForm = () => {
 
   const router = useRouter();
 
-  const { setUser } = useAppStore((state) => state);
+  const { setUser } = useUserStore((state) => state);
 
   // サインアップ
   const handleSignUp = async (formData: SignUpFormSchema) => {

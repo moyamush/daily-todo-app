@@ -11,6 +11,8 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-  const [selected, setSelected] = useState<Date | undefined>(new Date());
-  return <Calendar selected={selected} onSelected={setSelected} />;
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+    new Date(),
+  );
+  return <Calendar selectedDate={selectedDate} onSelected={setSelectedDate} />;
 };

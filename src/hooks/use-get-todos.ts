@@ -3,19 +3,17 @@ import {
   GetTodosRequest,
   GetTodosResponse,
 } from "@/api/todo/get-todos";
-import { useAppStore } from "@/providers/store-provider";
 import { format } from "date-fns";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 /**
- * TODO一覧カスタムフック
+ * TODOの取得
  */
-export const useTodoTable = () => {
-  // 選択中の日付
-  const { selectedDate } = useAppStore((state) => state);
+export default function useGetTodos() {
   // タスク一覧
   const [todos, setTodos] = useState<GetTodosResponse[]>([]);
-  const fetchData = useCallback(async () => {
+
+  const handleFetchTodo = useCallback(async (selectedDate: Date) => {
     try {
       const req: GetTodosRequest = {
         date: format(selectedDate, "yyyy-MM-dd"),
@@ -25,13 +23,10 @@ export const useTodoTable = () => {
     } catch (err) {
       console.error(err);
     }
-  }, [selectedDate]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  }, []);
 
   return {
     todos,
+    handleFetchTodo,
   };
-};
+}

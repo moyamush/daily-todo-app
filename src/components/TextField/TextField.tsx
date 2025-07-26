@@ -9,6 +9,9 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 
+/**
+ * テキストフィールドコンポーネントインターフェース
+ */
 interface TextFieldProps<T extends FieldValues> {
   // フォームフィールド名
   name: Path<T>;

@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { useConfirmCode } from "../_hooks/use-confirm-code";
 import { Form } from "@/components/ui/form";
 import { OTPField } from "@/components/OTPField/OTPField";
@@ -8,7 +7,7 @@ import { Message } from "@/components/Message/Message";
 /**
  * 確認コードフォーム
  */
-const ConfirmForm: FC = () => {
+export function ConfirmForm() {
   const { form, handleConfirmCode, message } = useConfirmCode();
 
   return (
@@ -22,6 +21,4 @@ const ConfirmForm: FC = () => {
       </form>
     </Form>
   );
-};
-
-export default ConfirmForm;
+}

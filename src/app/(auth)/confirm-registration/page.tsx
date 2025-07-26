@@ -1,7 +1,7 @@
 "use client";
 import { PageTitle } from "@/components/PageTitle/PageTitle";
 import { FC } from "react";
-import ConfirmForm from "./_components/ConfirmForm";
+import { ConfirmForm } from "./_components/ConfirmForm";
 
 /**
  * サインアップ確認ページ

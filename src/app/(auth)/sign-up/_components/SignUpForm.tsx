@@ -2,14 +2,13 @@ import { TextField } from "@/components/TextField/TextField";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
-import { FC } from "react";
 import { useSignUpForm } from "../_hooks/use-sign-up-form";
 import { Message } from "@/components/Message/Message";
 
 /**
  * サインアップフォーム
  */
-const SignUpForm: FC = () => {
+export function SignUpForm() {
   const { form, handleSignUp, message } = useSignUpForm();
   return (
     <Card className="w-1/2">
@@ -42,6 +41,4 @@ const SignUpForm: FC = () => {
       </CardContent>
     </Card>
   );
-};
-
-export default SignUpForm;
+}

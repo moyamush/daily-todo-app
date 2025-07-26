@@ -2,7 +2,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { MSWProvider } from "@/providers/msw-provider";
-import { StoreProvider } from "@/providers/store-provider";
 import { HomeHeader } from "@/components/HomeHeader/HomeHeader";
 import { useLogout } from "@/hooks/use-logout";
 import { AuthProvider } from "@/providers/auth-provider";
@@ -30,14 +29,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <StoreProvider>
-          <MSWProvider>
-            <AuthProvider>
-              <HomeHeader onLogout={handleLogout} />
-              {children}
-            </AuthProvider>
-          </MSWProvider>
-        </StoreProvider>
+        <MSWProvider>
+          <AuthProvider>
+            <HomeHeader onLogout={handleLogout} />
+            {children}
+          </AuthProvider>
+        </MSWProvider>
       </body>
     </html>
   );

@@ -1,18 +1,18 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editTodoSchema, EditTodoSchema } from "./edit-todo-schema";
-import useGetTags from "@/hooks/use-get-tags";
 import { useState } from "react";
-import useGetStatuses from "@/hooks/use-get-statuses";
+import { useTagStore } from "@/stores/tag-store";
+import { useStatusStore } from "@/stores/status-store";
 
 /**
  * TODO編集カスタムフック
  */
 export const useEditTodo = () => {
   // タグ一覧
-  const { tagOptions } = useGetTags();
+  const tagOptions = useTagStore((state) => state.tagOptions);
   // ステータス一覧の取得
-  const { statusOptions } = useGetStatuses();
+  const statusOptions = useStatusStore((state) => state.statusOptions);
 
   // フォーム初期化
   const form = useForm<EditTodoSchema>({

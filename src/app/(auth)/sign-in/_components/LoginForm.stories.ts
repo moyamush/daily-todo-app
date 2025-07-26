@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import LoginForm from "./LoginForm";
+import { LoginForm } from "./LoginForm";
 
 const meta = {
   component: LoginForm,

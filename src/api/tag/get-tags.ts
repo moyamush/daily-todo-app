@@ -25,5 +25,6 @@ export interface GetTagsResponse {
 export const getTags = async (
   request: GetTagsRequest,
 ): Promise<GetTagsResponse[]> => {
+  console.log("called get tags");
   return await apiClient.get(RESOUECE, { params: request });
 };

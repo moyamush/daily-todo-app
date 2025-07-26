@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import ConfirmForm from "./ConfirmForm";
+import { ConfirmForm } from "./ConfirmForm";
 
 const meta = {
   component: ConfirmForm,

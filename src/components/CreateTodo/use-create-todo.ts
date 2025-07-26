@@ -2,22 +2,19 @@ import { useForm } from "react-hook-form";
 import { createTodoSchema, CreateTodoSchema } from "./create-todo-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createTodo, CreateTodoRequest } from "@/api/todo/create-todo";
-import { useAppStore } from "@/providers/store-provider";
 import { format } from "date-fns";
-import useGetTags from "@/hooks/use-get-tags";
 import { useState } from "react";
-import useGetStatuses from "@/hooks/use-get-statuses";
+import { useTagStore } from "@/stores/tag-store";
+import { useStatusStore } from "@/stores/status-store";
 
 /**
  * TODO追加カスタムフック
  */
 export const useCreateTodo = () => {
-  // 選択中の日付
-  const { selectedDate } = useAppStore((state) => state);
   // タグ一覧
-  const { tagOptions } = useGetTags();
+  const tagOptions = useTagStore((state) => state.tagOptions);
   // ステータス一覧の取得
-  const { statusOptions } = useGetStatuses();
+  const statusOptions = useStatusStore((state) => state.statusOptions);
 
   // フォーム初期化
   const form = useForm<CreateTodoSchema>({
@@ -34,7 +31,11 @@ export const useCreateTodo = () => {
   const [createOpen, setCreateOpen] = useState<boolean>(false);
 
   // TODOの追加
-  const handleCreateTodo = async (formData: CreateTodoSchema) => {
+  const handleCreateTodo = async (
+    selectedDate: Date,
+    formData: CreateTodoSchema,
+    onCreated?: (date: Date) => void,
+  ) => {
     try {
       const req: CreateTodoRequest = {
         selectedDate: format(selectedDate, "yyyy-MM-dd"),
@@ -44,6 +45,7 @@ export const useCreateTodo = () => {
         status: formData.status,
       };
       await createTodo(req);
+      onCreated?.(selectedDate);
     } catch (err) {
       console.error(err);
     }

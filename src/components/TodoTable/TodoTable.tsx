@@ -1,6 +1,4 @@
 "use client";
-import useGetTags from "@/hooks/use-get-tags";
-import EditTodo from "../EditTodo/EditTodo";
 import { Button } from "../ui/button";
 import {
   Table,
@@ -9,22 +7,36 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { useTodoTable } from "./use-todo-table";
 import { Badge } from "../ui/badge";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { GetTagsResponse } from "@/api/tag/get-tags";
-import useGetStatuses from "@/hooks/use-get-statuses";
 import { GetStatusesResponse } from "@/api/status/get-statuses";
+import { GetTodosResponse } from "@/api/todo/get-todos";
+import { EditTodo } from "../EditTodo/EditTodo";
+import { useTagStore } from "@/stores/tag-store";
+import { useUserStore } from "@/stores/user-store";
+import { useStatusStore } from "@/stores/status-store";
+
+/**
+ * TODOテーブルコンポーネントインターフェース
+ */
+interface TodoTableProps {
+  todos: GetTodosResponse[];
+}
+
 /**
  * TODOテーブルコンポーネント
  */
-export function TodoTable() {
-  // TODO一覧
-  const { todos } = useTodoTable();
+export function TodoTable({ todos }: TodoTableProps) {
+  const user = useUserStore((state) => state.user);
+
   // タグ一覧
-  const { tags } = useGetTags();
+  const tags = useTagStore((state) => state.tags);
+  const fetchTags = useTagStore((state) => state.fetchTags);
+
   // ステータス一覧
-  const { statuses } = useGetStatuses();
+  const statuses = useStatusStore((state) => state.statuses);
+  const fetchStatuses = useStatusStore((state) => state.fetchStatuses);
 
   const tagMap = useMemo(() => {
     const map = new Map<string, GetTagsResponse>();
@@ -42,10 +54,17 @@ export function TodoTable() {
     return map;
   }, [statuses]);
 
+  useEffect(() => {
+    if (user) {
+      fetchTags(user);
+      fetchStatuses(user);
+    }
+  }, [user, fetchTags, fetchStatuses]);
+
   return (
     <Table>
-      <TableHeader className="bg-primary text-primary-foreground">
-        <TableRow>
+      <TableHeader className="bg-primary text-primary-foreground h-12">
+        <TableRow className="text-lg">
           <TableCell>タスク名</TableCell>
           <TableCell>タグ</TableCell>
           <TableCell>所要時間</TableCell>

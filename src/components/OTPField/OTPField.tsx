@@ -9,6 +9,9 @@ import {
 } from "../ui/form";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 
+/**
+ * OTPフィールドコンポーネントインターフェース
+ */
 interface OTPFieldProps<T extends FieldValues> {
   // フォームフィールド名
   name: Path<T>;

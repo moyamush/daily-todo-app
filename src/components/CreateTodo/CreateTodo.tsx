@@ -9,16 +9,23 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FC } from "react";
 import { useCreateTodo } from "./use-create-todo";
 import { Form } from "../ui/form";
 import { TextField } from "../TextField/TextField";
 import { SelectField } from "../SelectField/SelectField";
 
 /**
+ * TODO追加コンポーネントインターフェース
+ */
+interface CreateTodoProps {
+  selectedDate: Date;
+  onCreated?: (date: Date) => Promise<void>;
+}
+
+/**
  * TODO追加コンポーネント
  */
-const CreateTodo: FC = () => {
+export function CreateTodo({ selectedDate, onCreated }: CreateTodoProps) {
   const {
     form,
     tagOptions,
@@ -27,6 +34,7 @@ const CreateTodo: FC = () => {
     createOpen,
     handleCreateOpenChange,
   } = useCreateTodo();
+
   return (
     <Dialog open={createOpen} onOpenChange={handleCreateOpenChange}>
       <DialogTrigger asChild>
@@ -40,7 +48,11 @@ const CreateTodo: FC = () => {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleCreateTodo)}>
+          <form
+            onSubmit={form.handleSubmit((formData) =>
+              handleCreateTodo(selectedDate, formData, onCreated),
+            )}
+          >
             <TextField
               name="taskName"
               type="text"
@@ -82,6 +94,4 @@ const CreateTodo: FC = () => {
       </DialogContent>
     </Dialog>
   );
-};
-
-export default CreateTodo;
+}

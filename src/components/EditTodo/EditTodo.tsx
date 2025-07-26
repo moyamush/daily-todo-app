@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FC } from "react";
 import { useEditTodo } from "./use-edit-todo";
 import { TextField } from "../TextField/TextField";
 import { Form } from "../ui/form";
@@ -18,7 +17,7 @@ import { SelectField } from "../SelectField/SelectField";
 /**
  * TODO編集コンポーネント
  */
-const EditTodo: FC = () => {
+export function EditTodo() {
   const {
     form,
     tagOptions,
@@ -82,6 +81,4 @@ const EditTodo: FC = () => {
       </DialogContent>
     </Dialog>
   );
-};
-
-export default EditTodo;
+}

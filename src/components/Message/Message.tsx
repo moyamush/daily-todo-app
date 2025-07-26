@@ -1,5 +1,8 @@
 import { Alert, AlertTitle } from "../ui/alert";
 
+/**
+ * メッセージコンポーネントインターフェース
+ */
 interface MessageProps {
   // メッセージ
   message: string;

@@ -1,5 +1,4 @@
 "use client";
-import { FC } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { TextField } from "@/components/TextField/TextField";
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,7 @@ import { useNewChangePassword } from "../_hooks/use-new-change-password";
 /**
  * パスワード変更フォーム
  */
-const NewChangePasswordForm: FC = () => {
+export function NewChangePasswordForm() {
   const { form, handleNewChangePassword } = useNewChangePassword();
 
   return (
@@ -32,6 +31,4 @@ const NewChangePasswordForm: FC = () => {
       </CardContent>
     </Card>
   );
-};
-
-export default NewChangePasswordForm;
+}

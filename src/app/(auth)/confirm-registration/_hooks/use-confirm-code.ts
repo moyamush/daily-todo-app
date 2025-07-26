@@ -5,8 +5,8 @@ import {
 } from "../_schemas/confirm-form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useAppStore } from "@/providers/store-provider";
 import { useState } from "react";
+import { useUserStore } from "@/stores/user-store";
 
 /**
  * 確認コード入力カスタムフック
@@ -22,7 +22,7 @@ export const useConfirmCode = () => {
 
   const router = useRouter();
 
-  const { user } = useAppStore((state) => state);
+  const user = useUserStore((state) => state.user);
 
   // メッセージ
   const [message, setMessage] = useState<string | null>(null);

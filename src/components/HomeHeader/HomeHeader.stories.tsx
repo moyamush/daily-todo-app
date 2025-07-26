@@ -14,4 +14,8 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof HomeHeader>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: () => {
+    return <HomeHeader />;
+  },
+};

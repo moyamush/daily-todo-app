@@ -1,8 +1,8 @@
 "use client";
 
+import { useAuthStore } from "@/stores/auth-store";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect } from "react";
-import { useAppStore } from "./store-provider";
 
 export interface AuthProviderProps {
   children: ReactNode;
@@ -13,10 +13,12 @@ export interface AuthProviderProps {
  */
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter();
-  const { isAuthenticated } = useAppStore((state) => state);
+  const isAuthenticated = useAuthStore(
+    (state) => state.token !== null && typeof state.token === "string",
+  );
 
   useEffect(() => {
-    if (!isAuthenticated()) {
+    if (!isAuthenticated) {
       router.push("/sign-in");
     }
   }, [isAuthenticated, router]);

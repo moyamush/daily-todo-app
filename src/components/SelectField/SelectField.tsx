@@ -16,7 +16,9 @@ import {
 } from "../ui/select";
 import { Badge } from "../ui/badge";
 
-// セレクトオプションのインターフェース
+/**
+ * セレクトオプションのインターフェース
+ */
 export interface SelectOption {
   // ラベル
   label: string;
@@ -26,7 +28,9 @@ export interface SelectOption {
   value: string;
 }
 
-// セレクトフィールドのインターフェース
+/**
+ * セレクトフィールドコンポーネントインターフェース
+ */
 interface SelectFieldProps<T extends FieldValues> {
   // フォームフィールド名
   name: Path<T>;

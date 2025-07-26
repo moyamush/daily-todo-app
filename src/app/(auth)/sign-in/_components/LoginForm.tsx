@@ -1,6 +1,5 @@
 "use client";
 import { Form } from "@/components/ui/form";
-import { FC } from "react";
 import { TextField } from "@/components/TextField/TextField";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,7 +10,7 @@ import { Message } from "@/components/Message/Message";
 /**
  * ログインフォーム
  */
-const LoginForm: FC = () => {
+export function LoginForm() {
   const { form, handleLogin, message } = useLoginForm();
 
   return (
@@ -51,6 +50,4 @@ const LoginForm: FC = () => {
       </CardContent>
     </Card>
   );
-};
-
-export default LoginForm;
+}

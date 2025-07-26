@@ -1,10 +1,13 @@
 "use client";
-import { useAppStore } from "@/providers/store-provider";
 import { Button } from "../ui/button";
 import { format } from "date-fns";
 import Link from "next/link";
 import { BsCalendar2Date } from "react-icons/bs";
+import { useAuthStore } from "@/stores/auth-store";
 
+/**
+ * ホームヘッダーコンポーネントインターフェース
+ */
 interface HomeHeaderProps {
   // ログアウトメソッド
   onLogout?: () => void;
@@ -16,10 +19,12 @@ interface HomeHeaderProps {
 export function HomeHeader({ onLogout }: HomeHeaderProps) {
   const now = new Date();
   const today = format(now, "yyyy-MM-dd");
-  const { isAuthenticated } = useAppStore((state) => state);
+  const isAuthenticated = useAuthStore(
+    (state) => state.token !== null && typeof state.token === "string",
+  );
 
   return (
-    isAuthenticated() && (
+    isAuthenticated && (
       <header className="w-full border-b px-6 py-4 flex items-center justify-between bg-white shadow-sm">
         <div className="text-2xl font-bold tracking-tight">
           <Link href="/">DailyTodoApp</Link>
